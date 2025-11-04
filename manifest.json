@@ -1,0 +1,9 @@
+{
+    "name": "My Ton App",
+    "description": "Example Tonkeeper integration",
+    "icon": "https://takashi-gaming-items-store.vercel.app/img/icon.jpg",
+    "developer": {
+        "name": "Takashi",
+        "url": "https://takashi-gaming-items-store.vercel.app/"
+    }
+}
