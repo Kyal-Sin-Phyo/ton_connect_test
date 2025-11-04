@@ -1,112 +1,13 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TON Wallet Connect</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        button {
-            background-color: #0088cc;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #0066aa;
-        }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .status {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .connected {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-        .wallet-info {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-    </style>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@tonconnect/protocol@2.3.0/+esm"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>🔗 TON Wallet Connection</h1>
-        
-        <div id="status" class="status info">
-            Loading TON Connect...
-        </div>
-
-        <div>
-            <button id="connectBtn">Connect Tonkeeper</button>
-            <button id="disconnectBtn">Disconnect</button>
-            <button id="sendTrxBtn">Send Test Transaction</button>
-        </div>
-
-        <div id="walletInfo" class="wallet-info" style="display: none;">
-            <h3>Wallet Information</h3>
-            <p><strong>Address:</strong> <span id="walletAddress">-</span></p>
-            <p><strong>Balance:</strong> <span id="walletBalance">-</span></p>
-            <p><strong>Network:</strong> <span id="walletNetwork">-</span></p>
-        </div>
-
-        <div id="transactionResult" style="display: none; margin-top: 20px;"></div>
-    </div>
-
-    <script type="module">
-        import tonconnectprotocol from 'https://cdn.jsdelivr.net/npm/@tonconnect/protocol@2.3.0/+esm';
-
-        const connect = new TonConnect({
-            manifestUrl: 'https://ton-connect-test-gamma.vercel.app/manifest.json';
-        });
-
-    </script>
-</body>
-</html>
- -->
-
+<!-- index.html -->
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8" />
   <title>TONConnect demo</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.3.1/+esm"></script>
+
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+
 </head>
 <body>
     <button id="connectBtn">Connect with Tonkeeper</button>
@@ -114,39 +15,20 @@
 
     <script type="module">
 
-        // CDN မှ TonConnect UI ကို import (သင့် project မှာ npm install လုပ်လည်းရပါတယ်)
-        import tonconnectui from '@tonconnect/sdk';
-
-        // သင့် manifest ဖိုင် URL — အမြဲ HTTPS နှင့် publicly GET-able ဖြစ်ရမည်
-        const manifestUrl = 'https://ton-connect-test-gamma.vercel.app/manifest.json';
-
-        // TonConnect instance ဖန်တီး
-        const tonConnect = new tonconnectui ({ manifestUrl });
-
-        const connectBtn = document.getElementById('connectBtn');
-        const status = document.getElementById('status');
-
-        // connect ကို ခေါ်လိုက်တဲ့ အချိန် — wallet chooser modal ပေါ်လာပြီး
-        // Tonkeeper ထည့်ထားတဲ့ device မှာ Tonkeeper ကို အလိုအလျောက် ဖွင့်ပေးပါလိမ့်မယ်
-        connectBtn.addEventListener('click', async () => {
-            alert(tonconnectui);
-        try {
-            const session = await tonConnect.connect();
-            // session ထဲက wallet info ရနိုင်တယ် (address စာရင်း အစရှိ)
-            console.log('Connected session:', session);
-            const address = session?.account?.address ?? 'no address';
-            status.textContent = `Connected: ${address}`;
-        } catch (err) {
-            console.error('Connect failed or user cancelled', err);
-            status.textContent = 'Not connected (cancelled or error)';
-        }
+        const tonConnectUI = new TON_CONNECT_UI({
+            manifestUrl: "https://ton-connect-test-gamma.vercel.app/manifest.json",
+            buttonRootId: "connectBtn"
         });
 
-        // Disconnect နည်း (optional)
-        // await tonConnect.disconnect();
+        tonConnectUI.onStatusChange(wallet => {
+            if(wallet) {
+                alert("Connected Wallet: ", wallet);
+            } else {
+                alert("Disconnected");
+            }
+
+        });
+
     </script>
 </body>
 </html>
-
-
-
