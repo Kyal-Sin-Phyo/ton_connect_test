@@ -106,6 +106,7 @@
   <meta charset="utf-8" />
   <title>TONConnect demo</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.3.1/+esm"></script>
 </head>
 <body>
     <button id="connectBtn">Connect with Tonkeeper</button>
@@ -114,7 +115,7 @@
     <script type="module">
 
         // CDN မှ TonConnect UI ကို import (သင့် project မှာ npm install လုပ်လည်းရပါတယ်)
-        import tonconnectui from 'https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.3.1/+esm'
+        import tonconnectui from '@tonconnect/sdk';
 
         // သင့် manifest ဖိုင် URL — အမြဲ HTTPS နှင့် publicly GET-able ဖြစ်ရမည်
         const manifestUrl = 'https://ton-connect-test-gamma.vercel.app/manifest.json';
@@ -146,5 +147,6 @@
     </script>
 </body>
 </html>
+
 
 
