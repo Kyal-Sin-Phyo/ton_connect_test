@@ -128,6 +128,7 @@
         // connect ကို ခေါ်လိုက်တဲ့ အချိန် — wallet chooser modal ပေါ်လာပြီး
         // Tonkeeper ထည့်ထားတဲ့ device မှာ Tonkeeper ကို အလိုအလျောက် ဖွင့်ပေးပါလိမ့်မယ်
         connectBtn.addEventListener('click', async () => {
+            alert(tonconnectui);
         try {
             const session = await tonConnect.connect();
             // session ထဲက wallet info ရနိုင်တယ် (address စာရင်း အစရှိ)
@@ -145,4 +146,5 @@
     </script>
 </body>
 </html>
+
 
