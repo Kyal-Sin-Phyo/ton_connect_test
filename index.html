@@ -19,6 +19,14 @@
             manifestUrl: "https://ton-connect-test-gamma.vercel.app/manifest.json",
             buttonRootId: "connectBtn"
         });
+        document.querySelector('#connectBtn').onclick = async function() {
+            try {
+                const wallet = await tonConnectUI.connectWallet();
+                alert(wallet);
+            } catch(err) {
+                alert(err)
+            }
+        }
 
         tonConnectUI.onStatusChange(wallet => {
             if(wallet) {
@@ -32,4 +40,3 @@
     </script>
 </body>
 </html>
-
