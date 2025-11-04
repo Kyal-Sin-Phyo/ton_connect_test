@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -97,7 +97,53 @@
         });
 
     </script>
+</body>
+</html>
+ -->
 
+<!-- index.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>TONConnect demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+    <button id="connectBtn">Connect with Tonkeeper</button>
+    <div id="status">Not connected</div>
 
+    <script type="module">
+
+        // CDN မှ TonConnect UI ကို import (သင့် project မှာ npm install လုပ်လည်းရပါတယ်)
+        import tonconnectui from 'https://cdn.jsdelivr.net/npm/@tonconnect/ui@2.3.1/+esm'
+
+        // သင့် manifest ဖိုင် URL — အမြဲ HTTPS နှင့် publicly GET-able ဖြစ်ရမည်
+        const manifestUrl = 'https://ton-connect-test-gamma.vercel.app/manifest.json';
+
+        // TonConnect instance ဖန်တီး
+        const tonConnect = new tonconnectui ({ manifestUrl });
+
+        const connectBtn = document.getElementById('connectBtn');
+        const status = document.getElementById('status');
+
+        // connect ကို ခေါ်လိုက်တဲ့ အချိန် — wallet chooser modal ပေါ်လာပြီး
+        // Tonkeeper ထည့်ထားတဲ့ device မှာ Tonkeeper ကို အလိုအလျောက် ဖွင့်ပေးပါလိမ့်မယ်
+        connectBtn.addEventListener('click', async () => {
+        try {
+            const session = await tonConnect.connect();
+            // session ထဲက wallet info ရနိုင်တယ် (address စာရင်း အစရှိ)
+            console.log('Connected session:', session);
+            const address = session?.account?.address ?? 'no address';
+            status.textContent = `Connected: ${address}`;
+        } catch (err) {
+            console.error('Connect failed or user cancelled', err);
+            status.textContent = 'Not connected (cancelled or error)';
+        }
+        });
+
+        // Disconnect နည်း (optional)
+        // await tonConnect.disconnect();
+    </script>
 </body>
 </html>
