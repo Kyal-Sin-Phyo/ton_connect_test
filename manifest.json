@@ -1,9 +1,5 @@
 {
-    "name": "My Ton App",
-    "description": "Example Tonkeeper integration",
-    "icon": "https://takashi-gaming-items-store.vercel.app/img/icon.jpg",
-    "developer": {
-        "name": "Takashi",
-        "url": "https://takashi-gaming-items-store.vercel.app/"
-    }
+  "url": "https://ton-connect-test-gamma.vercel.app/",
+  "name": "My Ton Web App",
+  "iconUrl": https://ton-connect-test-gamma.vercel.app/img/logo.png"
 }
